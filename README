@@ -1,0 +1,157 @@
+# Retail Inventory Management Analysis 📊
+
+## 📌 Project Overview
+
+This project focuses on analyzing retail sales, inventory, product, and supplier data using **MySQL**.
+
+The objective is to use SQL to analyze business performance, identify high-performing products, monitor inventory levels, evaluate suppliers, and generate useful business insights.
+
+This project demonstrates practical SQL skills required for **Data Analyst** roles.
+
+---
+
+## 🛠️ Tools & Technologies
+
+- MySQL
+- MySQL Workbench
+- SQL
+- GitHub
+
+---
+
+## 🗄️ Database Structure
+
+The project contains four main tables:
+
+### 1. Suppliers
+
+Stores information about product suppliers.
+
+| Column | Description |
+|---|---|
+| supplier_id | Unique supplier ID |
+| supplier_name | Name of supplier |
+| city | Supplier location |
+
+### 2. Products
+
+Stores product information.
+
+| Column | Description |
+|---|---|
+| product_id | Unique product ID |
+| product_name | Product name |
+| category | Product category |
+| supplier_id | Supplier reference |
+| unit_price | Price per unit |
+
+### 3. Inventory
+
+Stores current inventory information.
+
+| Column | Description |
+|---|---|
+| inventory_id | Unique inventory ID |
+| product_id | Product reference |
+| stock_quantity | Current stock |
+| reorder_level | Minimum stock level |
+| last_updated | Last inventory update date |
+
+### 4. Sales
+
+Stores sales transactions.
+
+| Column | Description |
+|---|---|
+| sale_id | Unique sale ID |
+| product_id | Product reference |
+| sale_date | Date of sale |
+| quantity_sold | Units sold |
+| sales_amount | Revenue generated |
+
+---
+
+## 📚 SQL Concepts Covered
+
+This project covers the following SQL concepts:
+
+- SELECT
+- WHERE
+- ORDER BY
+- LIMIT
+- Aggregate Functions
+- GROUP BY
+- HAVING
+- INNER JOIN
+- CASE WHEN
+- Subqueries
+- Correlated Subqueries
+- Common Table Expressions (CTEs)
+- Window Functions
+- RANK()
+- ROW_NUMBER()
+- DENSE_RANK()
+- LAG()
+- LEAD()
+- Date & Time Functions
+- YEAR()
+- MONTH()
+- MONTHNAME()
+- QUARTER()
+- DAYNAME()
+- DATEDIFF()
+- Inventory KPIs
+- Business Analysis
+
+---
+
+## 📊 Key Business Questions
+
+The project answers practical business questions such as:
+
+### Sales Analysis
+
+- What are the top-performing products by revenue?
+- Which products have the highest quantity sold?
+- What is the monthly revenue?
+- What is the quarterly revenue?
+- Which category generates the highest revenue?
+- Which suppliers generate the highest revenue?
+
+### Inventory Analysis
+
+- Which products need to be reordered?
+- Which products are out of stock?
+- What is the inventory value of each product?
+- Which category has the highest inventory value?
+- Which products have low stock but high revenue?
+- How many days has it been since inventory was updated?
+
+### Product Performance
+
+- Which products generate revenue above the average?
+- Which products sell more than the average quantity?
+- Which product has the highest revenue in each category?
+- Which product has the highest quantity sold in each category?
+
+---
+
+## 🔎 Example SQL Analysis
+
+### Top 5 Products by Revenue
+
+```sql
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.category,
+    SUM(s.sales_amount) AS total_revenue
+FROM products p
+JOIN sales s 
+    ON p.product_id = s.product_id
+GROUP BY 
+    p.product_id,
+    p.product_name,
+    p.category
+ORDER BY total_revenue DESC
+LIMIT 5;
